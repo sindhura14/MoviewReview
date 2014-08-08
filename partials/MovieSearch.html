@@ -1,0 +1,11 @@
+<div id="input">
+    <input type="text" ng-keydown="getName($event)" ng-model="inp_movie_search" placeholder="Search for a movie"></div>
+<div id="data">
+    <div ng-repeat='movie in movies' class="movies" >
+        <a href="#/search/{{movie.id}}" target="_blank"> <img id='img1'ng-src="{{movie.poster_path}}"></a>
+        <div class="summary">
+            <p>Release Date :: {{movie.release_date}}</p>
+            <p>Popularity :: {{movie.popularity}}</p>
+        </div>
+    </div>
+</div>

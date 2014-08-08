@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html ng-app="mainMod">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="/angular/angular.js"></script>
+    <script src="/javascripts/configuration.js"></script>
+    <script src="/angular-route/angular-route.js"></script>
+    <script src="/javascripts/MovieSearch.js"> </script>
+    <script src="/javascripts/MovieDetails.js"></script>
+    <script src="/jquery/dist/jquery.js"></script>
+    <style>
+        body,html{
+            margin: 0;
+            padding: 0;
+            font:300 1em 'helvetica neue';
+            background-color: #fafffb;
+        }
+
+        /*CSS for Movie Details HTML*/
+        div.wrapper{
+            width: 70%;
+            /*height: 31.25em;*/
+            margin: 2em auto;
+            background-color: rgb(159, 159, 159);
+            box-shadow: 1px 1px 5px gray;
+        }
+
+        div.clearfix::after{
+            content: ".";
+            visibility: hidden;
+            display: block;
+            height: 0;
+            clear: both;
+        }
+
+        div#details{
+            text-align: left;
+            width:48%;
+            float: right;
+            font-size: 1.2em;
+            color: white;
+            text-shadow: 0.3px 0.4px 0.3px gray;
+        }
+
+        div#overview{
+            font-size: 1.2em;
+            color: white;
+            padding: 0.5em;
+            /*background-color: rgb(151, 151, 151);*/
+            text-shadow: 0.3px 0.4px 0.3px gray;
+        }
+        img#img2{
+            height: 31.25em;
+            width:25em;
+            box-shadow: 1px 1px 2px #757575;
+            margin: 0.5em;
+        }
+
+        a{
+            text-decoration: none;
+            color: white;
+        }
+
+        a:hover{
+            color: #e1e1e1;
+        }
+
+        span{
+            font-weight: bold;
+            color: #4f4f4f;
+        }
+
+
+    /*Css for Movie Search HTML*/
+        div#input{
+            margin: 1em 35em;
+        }
+        div#data{
+            width: 80%;
+            background-color: #f8f8f8;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        div#data:after {
+            content: ".";
+            visibility: hidden;
+            display: block;
+            height: 0;
+            clear: both;
+        }
+
+        div.movies{
+            display: inline-block;
+            margin: 1em;
+            position: relative;
+            width:  16em;
+            height: 304px;
+            box-shadow: 1px 1px 5px gray;
+        }
+
+        div.summary{
+            /* width:337px;*/
+            color:transparent;
+            position: absolute;
+            bottom:0;
+            padding: 1em;
+            background-color: transparent;
+            display:block;
+            width:14em;
+
+        }
+
+        img#img1{
+            height: 19em;
+            width:16em;
+
+        }
+
+        div.movies:hover > div.summary{
+            /*  display:block;   if we use display block and none for the summary , we can not apply transition on a display property*/
+            /* we can use color and background color */
+            color:white;
+            background-color: rgba(0,0,0,0.5);
+            transition:  all 500ms ease;
+
+        }
+
+        input{
+            padding: 0.5em;
+            margin: 1em;
+            width:11em;
+            box-shadow: 1px 1px gray;
+        }
+
+
+
+    </style>
+    <script>
+
+        var mainMod = angular.module('mainMod',['MovieSearchMod','MovieDetailsMod','ngRoute']);
+        mainMod.config(['$routeProvider',function($routeProvider){
+            $routeProvider.when('/search',{
+                templateUrl:'/MovieSearch.html',
+                controller:'MovieSearchCntrl'
+            }). when('/search/:id',{
+                templateUrl : '/movieDetails.html',
+                controller:'MovieDetailsCntrl'
+            }).otherwise({
+                redirectTo : '/search'
+            })
+        }]);
+    </script>
+
+
+
+
+
+
+</head>
+<body>
+
+<div ng-view>
+
+</div>
+</body>
+</html>

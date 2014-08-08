@@ -1,0 +1,38 @@
+<div>
+    <div class="wrapper clearfix">
+        <img id="img2" src="{{imagesrc}}" alt=""/>
+        <div id="details">
+            <p><span>Title : </span>{{details.title}}</p>
+            <p><span>Homepage : </span> <a href="{{details.homepage}}" target="_blank">{{details.homepage}}</a></p>
+            <p><span>ReleaseDate : </span>{{details.release_date}}</p>
+            <p><span>Budget : </span>{{details.budget}}</p>
+            <p><span>Revenue : </span>{{details.revenue}}</p>
+            <p><span>Popularity : </span> {{details.popularity}}</p>
+            <p><span>Vote Count : </span> {{details.vote_count}}</p>
+            <p><span>Vote Average : </span>{{details.vote_average}}</p>
+        </div>
+        <div id="overview"><span>Overview</span> <p>{{details.overview}}</p></div>
+
+        <form novalidate name="review_form" method="post" ng-submit="addNewReview($event)" ng-mode="form">
+            Email:<input type="email" ng-model="email" name="email" required/><br />
+            <div ng-show="review_form.email.$dirty && review_form.email.$invalid">Invalid:
+                <span ng-show="review_form.email.$error.required">Please enter an email address</span>
+                <span ng-show="review_form.email.$error.email">Please enter a valid email</span>
+            </div>
+            <div>Review :  <textarea rows="4" cols="50" ng-minlength="10" name="review_data" ng-model="review_data"  ng-maxlength="160" required></textarea></div>
+            <div ng-show ="review_form.review_data.$dirty && review_form.review_data.$invalid">
+                <span ng-show="review_form.review_data.$error.required">Please enter a review</span>
+                <span ng-show="review_form.review_data.$error.minlength">Please enter atleast 10 characters</span>
+            </div>
+            <div><input type="submit"  ng-disabled="review_form.$invalid"></div>
+        </form>
+
+        <div id="reviews">
+            <div ng-repeat="review in reviews">
+                <p>{{review.email}}</p>
+                <p>{{review.review | unescape }}</p>
+            </div>
+        </div>
+    </div>
+
+</div>
